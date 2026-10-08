@@ -1,0 +1,8 @@
+{
+  "public_url": "<ephemeral-quick-tunnel-url>",
+  "job_id": "img_98adb924082441c8a765fa86516aceb2",
+  "inference_seconds": 59.88366586000029,
+  "sha256": "e08f68bd52768e77dbdcf64bcdcfa510401fda8692ed536f93f03bd7893932d3",
+  "png_bytes": 313820,
+  "verdict": "PASS"
+}

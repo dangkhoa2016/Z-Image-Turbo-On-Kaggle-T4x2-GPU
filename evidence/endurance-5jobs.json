@@ -1,0 +1,86 @@
+{
+  "initial_states": [
+    "running",
+    "queued",
+    "queued",
+    "queued",
+    "queued"
+  ],
+  "jobs": [
+    {
+      "id": "img_338b67014d69493d9b6a3affb2797129",
+      "seed": 1001,
+      "submitted_at": 1791445322.6606016,
+      "started_at": 1791445322.6607149,
+      "finished_at": 1791445380.626928,
+      "inference_seconds": 57.39113730400004,
+      "sha256": "e0d24a9686b9bda2299976e889c761d629484ad4326793f0864360d88a20985c",
+      "gpu0_allocated_before": 12374322688,
+      "gpu0_allocated_after": 12374322688,
+      "gpu1_allocated_before": 8223354368,
+      "gpu1_allocated_after": 8223354368,
+      "gpu0_peak_allocated": 12814324224,
+      "gpu1_peak_allocated": 9801237504
+    },
+    {
+      "id": "img_ae1c62c849ae4b7fa75a365f5fea9bf6",
+      "seed": 1002,
+      "submitted_at": 1791445322.6707003,
+      "started_at": 1791445380.6269493,
+      "finished_at": 1791445436.218355,
+      "inference_seconds": 55.03712829599999,
+      "sha256": "08873d5ef90980b537271abca7a55fc7d2149495f5efcbce822ad6e3cc82f9ae",
+      "gpu0_allocated_before": 12374322688,
+      "gpu0_allocated_after": 12374322688,
+      "gpu1_allocated_before": 8223354368,
+      "gpu1_allocated_after": 8223354368,
+      "gpu0_peak_allocated": 12814324224,
+      "gpu1_peak_allocated": 9801237504
+    },
+    {
+      "id": "img_4466a628b7dc48f3aa4be7efd3345976",
+      "seed": 1003,
+      "submitted_at": 1791445322.6740217,
+      "started_at": 1791445436.218373,
+      "finished_at": 1791445492.5047634,
+      "inference_seconds": 55.73492304399997,
+      "sha256": "6c1978547b0692e18b587d09f947558eebefd9f59f413ddd5b8ff441cbcda5b3",
+      "gpu0_allocated_before": 12374322688,
+      "gpu0_allocated_after": 12374322688,
+      "gpu1_allocated_before": 8223354368,
+      "gpu1_allocated_after": 8223354368,
+      "gpu0_peak_allocated": 12814324224,
+      "gpu1_peak_allocated": 9801237504
+    },
+    {
+      "id": "img_bc94f173eb4c405dbe3ddc526cf96b8c",
+      "seed": 1004,
+      "submitted_at": 1791445322.677269,
+      "started_at": 1791445492.504781,
+      "finished_at": 1791445549.5634348,
+      "inference_seconds": 56.44990002299983,
+      "sha256": "272f8198806373ef5ec1020d91aecb21b0038f9e94c64ec11d09be8876a5f76e",
+      "gpu0_allocated_before": 12374322688,
+      "gpu0_allocated_after": 12374322688,
+      "gpu1_allocated_before": 8223354368,
+      "gpu1_allocated_after": 8223354368,
+      "gpu0_peak_allocated": 12814324224,
+      "gpu1_peak_allocated": 9801237504
+    },
+    {
+      "id": "img_8802fccf905d4fdca7c1106380b7092f",
+      "seed": 1005,
+      "submitted_at": 1791445322.6802433,
+      "started_at": 1791445549.5634522,
+      "finished_at": 1791445606.3611085,
+      "inference_seconds": 56.23673153599975,
+      "sha256": "8c6dd0c9c75d494860ec0417609bc97075ecdb108bf790520ae87c7be6f71896",
+      "gpu0_allocated_before": 12374322688,
+      "gpu0_allocated_after": 12374322688,
+      "gpu1_allocated_before": 8223354368,
+      "gpu1_allocated_after": 8223354368,
+      "gpu0_peak_allocated": 12814324224,
+      "gpu1_peak_allocated": 9801237504
+    }
+  ]
+}

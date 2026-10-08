@@ -1,0 +1,71 @@
+{
+  "checks": {
+    "missing_auth": [
+      401,
+      {
+        "detail": "missing bearer token"
+      }
+    ],
+    "invalid_auth": [
+      403,
+      {
+        "detail": "invalid bearer token"
+      }
+    ],
+    "blank_prompt": [
+      422,
+      {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body",
+              "prompt"
+            ],
+            "msg": "Value error, prompt must not be blank",
+            "input": "   ",
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      }
+    ],
+    "unsupported_1024": [
+      422,
+      {
+        "detail": [
+          {
+            "type": "value_error",
+            "loc": [
+              "body",
+              "profile"
+            ],
+            "msg": "Value error, unknown profile",
+            "input": "high_1024",
+            "ctx": {
+              "error": {}
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "ready_after": {
+    "ready": true,
+    "load": {
+      "gpu_names": [
+        "Tesla T4",
+        "Tesla T4"
+      ],
+      "model_path": "/kaggle/input/models/dangkhoa2016/tongyi-mai-z-image-turbo/pytorch/default/1",
+      "dtype": "bfloat16",
+      "model_load_seconds": 202.05134814300004,
+      "device_map": {
+        "transformer": 0,
+        "text_encoder": 1,
+        "vae": 1
+      }
+    }
+  }
+}
