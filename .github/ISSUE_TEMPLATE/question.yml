@@ -1,0 +1,18 @@
+name: Technical question
+description: Ask about the documented workflow
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: "Language: **English** | [Tiếng Việt](./question_vi.yml)"
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Include the document, endpoint, or profile you are referring to and what you already tried.

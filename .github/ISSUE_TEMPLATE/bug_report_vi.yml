@@ -1,0 +1,31 @@
+name: Báo lỗi (Tiếng Việt)
+description: Báo cáo vấn đề có thể tái hiện
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Ngôn ngữ: [English](./bug_report.yml) | **Tiếng Việt**. Vui lòng xóa token, private URL và dữ liệu tài khoản trước khi gửi."
+  - type: textarea
+    id: summary
+    attributes:
+      label: Vấn đề
+      description: Điều gì đã xảy ra và bạn kỳ vọng điều gì?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Cách tái hiện
+      description: Các bước tối thiểu, profile, seed và chi tiết request/response.
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime
+      placeholder: "Kaggle T4×2, phiên bản Python/PyTorch/diffusers"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log đã loại dữ liệu nhạy cảm
+      render: shell

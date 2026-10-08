@@ -1,0 +1,31 @@
+name: Bug report
+description: Report a reproducible problem
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Language: **English** | [Tiếng Việt](./bug_report_vi.yml). Remove tokens, private URLs, and account data before submitting."
+  - type: textarea
+    id: summary
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: Minimal steps, profile, seed, and request/response details.
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime
+      placeholder: "Kaggle T4×2, Python/PyTorch/diffusers versions"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs
+      render: shell

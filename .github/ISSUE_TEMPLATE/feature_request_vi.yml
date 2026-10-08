@@ -1,0 +1,29 @@
+name: Đề xuất tính năng (Tiếng Việt)
+description: Đề xuất một cải tiến tập trung
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: "Ngôn ngữ: [English](./feature_request.yml) | **Tiếng Việt**"
+  - type: textarea
+    id: problem
+    attributes:
+      label: Vấn đề cần giải quyết
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Thay đổi đề xuất
+    validations:
+      required: true
+  - type: dropdown
+    id: qualification
+    attributes:
+      label: Ảnh hưởng qualification
+      options:
+        - Không ảnh hưởng runtime contract
+        - Cần qualification Kaggle T4×2 mới
+        - Chưa chắc
+    validations:
+      required: true

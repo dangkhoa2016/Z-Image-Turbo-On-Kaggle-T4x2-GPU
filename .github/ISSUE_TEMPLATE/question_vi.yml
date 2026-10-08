@@ -1,0 +1,18 @@
+name: Câu hỏi kỹ thuật (Tiếng Việt)
+description: Hỏi về workflow đã được tài liệu hóa
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: "Ngôn ngữ: [English](./question.yml) | **Tiếng Việt**"
+  - type: textarea
+    id: question
+    attributes:
+      label: Câu hỏi
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Bối cảnh
+      description: Nêu tài liệu, endpoint hoặc profile liên quan và những gì bạn đã thử.

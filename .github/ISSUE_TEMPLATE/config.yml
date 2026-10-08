@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report / Báo cáo bảo mật
+    url: https://github.com/dangkhoa2016/Z-Image-Turbo-On-Kaggle-T4x2-GPU/security/policy
+    about: Report undisclosed vulnerabilities or exposed credentials privately.

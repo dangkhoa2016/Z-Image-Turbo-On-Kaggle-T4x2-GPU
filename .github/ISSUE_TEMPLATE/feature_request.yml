@@ -1,0 +1,29 @@
+name: Feature request
+description: Propose a focused improvement
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: "Language: **English** | [Tiếng Việt](./feature_request_vi.yml)"
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: dropdown
+    id: qualification
+    attributes:
+      label: Qualification impact
+      options:
+        - No runtime-contract impact
+        - Requires fresh Kaggle T4×2 qualification
+        - Unsure
+    validations:
+      required: true
