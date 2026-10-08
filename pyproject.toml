@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zimage-turbo-kaggle-t4x2-rest-server"
+version = "0.1.0"
+description = "Authenticated REST server demo for Tongyi-MAI Z-Image-Turbo on Kaggle NVIDIA T4 x2."
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Đăng Khoa", email = "i.am@dangkhoa.dev"}]
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn>=0.30",
+  "pydantic>=2",
+  "numpy>=2",
+  "pillow>=10",
+  "torch>=2.5",
+  "diffusers>=0.40",
+  "transformers>=5.0",
+  "accelerate>=1.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "httpx>=0.27"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

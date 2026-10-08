@@ -1,0 +1,16 @@
+.runtime/
+.pytest_cache/
+**/__pycache__/
+*.py[cod]
+logs/
+metadata/
+outputs/
+*.tar
+*.tar.gz
+*.sha256
+.env
+.DS_Store
+.superpowers/
+docs/superpowers/
+build/
+*.egg-info/
