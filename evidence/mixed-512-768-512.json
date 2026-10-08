@@ -1,0 +1,193 @@
+{
+  "summary": {
+    "sequence": [
+      "safe_512",
+      "high_768",
+      "safe_512"
+    ],
+    "latencies": [
+      59.13435082399974,
+      127.83654676000015,
+      56.35180962700042
+    ],
+    "sha256": [
+      "fe3c0799f832d10b507351380293959abb53d7153225fc798224e1e1d076037d",
+      "07307465165f58d6048753b3e51b437a0a4896ca32a42776785df5ee3e18ad89",
+      "b7847c5125f80eee07f1c12c372f71facf1181495170e1cd70ef880802497eac"
+    ],
+    "gpu0_peak_reserved_768": 15378415616,
+    "gpu1_peak_reserved_768": 14763950080,
+    "gpu0_final_allocated": 12374322688,
+    "gpu1_final_allocated": 8223223296,
+    "gpu0_final_reserved": 14512291840,
+    "gpu1_final_reserved": 14763950080,
+    "verdict": "PASS"
+  },
+  "runs": [
+    {
+      "request_id": "img_e6238333e3fa4981b38d6cea04263db4",
+      "profile": "safe_512",
+      "seed": 2001,
+      "width": 512,
+      "height": 512,
+      "steps": 9,
+      "guidance_scale": 0.0,
+      "dtype": "bfloat16",
+      "inference_seconds": 59.13435082399974,
+      "sha256": "fe3c0799f832d10b507351380293959abb53d7153225fc798224e1e1d076037d",
+      "output_path": "/kaggle/working/Z-Image-Turbo-Kaggle-T4x2-REST-Server/outputs/img_e6238333e3fa4981b38d6cea04263db4.png",
+      "pixel_stats": {
+        "width": 512,
+        "height": 512,
+        "min": 0,
+        "max": 255,
+        "mean": 108.01459630330403,
+        "std": 72.99772277702085,
+        "unique_colors": 92920
+      },
+      "memory_before": {
+        "gpu0": {
+          "allocated": 12364361216,
+          "reserved": 12547260416,
+          "peak_allocated": 12364361216,
+          "peak_reserved": 12547260416
+        },
+        "gpu1": {
+          "allocated": 8213654016,
+          "reserved": 8235515904,
+          "peak_allocated": 8213654016,
+          "peak_reserved": 8235515904
+        }
+      },
+      "memory_after": {
+        "gpu0": {
+          "allocated": 12374322688,
+          "reserved": 13270777856,
+          "peak_allocated": 12814328832,
+          "peak_reserved": 13270777856
+        },
+        "gpu1": {
+          "allocated": 8223223296,
+          "reserved": 10684989440,
+          "peak_allocated": 9801111552,
+          "peak_reserved": 10684989440
+        }
+      },
+      "device_map": {
+        "transformer": 0,
+        "text_encoder": 1,
+        "vae": 1
+      }
+    },
+    {
+      "request_id": "img_266e8bc07bef43f39efc61b89ff9a08a",
+      "profile": "high_768",
+      "seed": 2002,
+      "width": 768,
+      "height": 768,
+      "steps": 9,
+      "guidance_scale": 0.0,
+      "dtype": "bfloat16",
+      "inference_seconds": 127.83654676000015,
+      "sha256": "07307465165f58d6048753b3e51b437a0a4896ca32a42776785df5ee3e18ad89",
+      "output_path": "/kaggle/working/Z-Image-Turbo-Kaggle-T4x2-REST-Server/outputs/img_266e8bc07bef43f39efc61b89ff9a08a.png",
+      "pixel_stats": {
+        "width": 768,
+        "height": 768,
+        "min": 0,
+        "max": 255,
+        "mean": 116.70387437608507,
+        "std": 68.69089957929447,
+        "unique_colors": 169290
+      },
+      "memory_before": {
+        "gpu0": {
+          "allocated": 12374322688,
+          "reserved": 13270777856,
+          "peak_allocated": 12374322688,
+          "peak_reserved": 13270777856
+        },
+        "gpu1": {
+          "allocated": 8223223296,
+          "reserved": 10684989440,
+          "peak_allocated": 8223223296,
+          "peak_reserved": 10684989440
+        }
+      },
+      "memory_after": {
+        "gpu0": {
+          "allocated": 12374322688,
+          "reserved": 14512291840,
+          "peak_allocated": 14148140032,
+          "peak_reserved": 15378415616
+        },
+        "gpu1": {
+          "allocated": 8223223296,
+          "reserved": 14763950080,
+          "peak_allocated": 11773253632,
+          "peak_reserved": 14763950080
+        }
+      },
+      "device_map": {
+        "transformer": 0,
+        "text_encoder": 1,
+        "vae": 1
+      }
+    },
+    {
+      "request_id": "img_8ae551f921e9430998b9820182a1d16d",
+      "profile": "safe_512",
+      "seed": 2003,
+      "width": 512,
+      "height": 512,
+      "steps": 9,
+      "guidance_scale": 0.0,
+      "dtype": "bfloat16",
+      "inference_seconds": 56.35180962700042,
+      "sha256": "b7847c5125f80eee07f1c12c372f71facf1181495170e1cd70ef880802497eac",
+      "output_path": "/kaggle/working/Z-Image-Turbo-Kaggle-T4x2-REST-Server/outputs/img_8ae551f921e9430998b9820182a1d16d.png",
+      "pixel_stats": {
+        "width": 512,
+        "height": 512,
+        "min": 0,
+        "max": 255,
+        "mean": 107.36333719889323,
+        "std": 75.68118492494592,
+        "unique_colors": 90584
+      },
+      "memory_before": {
+        "gpu0": {
+          "allocated": 12374322688,
+          "reserved": 14512291840,
+          "peak_allocated": 12374322688,
+          "peak_reserved": 14512291840
+        },
+        "gpu1": {
+          "allocated": 8223223296,
+          "reserved": 14763950080,
+          "peak_allocated": 8223223296,
+          "peak_reserved": 14763950080
+        }
+      },
+      "memory_after": {
+        "gpu0": {
+          "allocated": 12374322688,
+          "reserved": 14512291840,
+          "peak_allocated": 12813018112,
+          "peak_reserved": 14512291840
+        },
+        "gpu1": {
+          "allocated": 8223223296,
+          "reserved": 14763950080,
+          "peak_allocated": 9801111552,
+          "peak_reserved": 14763950080
+        }
+      },
+      "device_map": {
+        "transformer": 0,
+        "text_encoder": 1,
+        "vae": 1
+      }
+    }
+  ]
+}

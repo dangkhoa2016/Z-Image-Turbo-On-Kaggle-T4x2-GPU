@@ -1,0 +1,109 @@
+{
+  "project": "Z-Image-Turbo-Kaggle-T4x2-REST-Server",
+  "hardware": {
+    "gpu_count": 2,
+    "gpu_model": "Tesla T4"
+  },
+  "model": "dangkhoa2016/tongyi-mai-z-image-turbo/PyTorch/default/1",
+  "dtype": "bfloat16",
+  "device_map": {
+    "transformer": 0,
+    "text_encoder": 1,
+    "vae": 1
+  },
+  "profiles": {
+    "safe_512": {
+      "width": 512,
+      "height": 512,
+      "steps": 9,
+      "guidance_scale": 0.0
+    },
+    "high_768": {
+      "width": 768,
+      "height": 768,
+      "steps": 9,
+      "guidance_scale": 0.0
+    }
+  },
+  "golden_512": {
+    "sha256": "56e0fca007d3da945de77788b5ab8a0a131b58730d93b624ca65e7c6ca6ea307",
+    "inference_seconds": 52.48268766800015,
+    "pixel_stats": {
+      "width": 512,
+      "height": 512,
+      "min": 0,
+      "max": 255,
+      "mean": 138.9663429260254,
+      "std": 67.73889570397705,
+      "unique_colors": 90846
+    },
+    "verdict": "PASS"
+  },
+  "queue_endurance": {
+    "initial_states": [
+      "running",
+      "queued",
+      "queued",
+      "queued",
+      "queued"
+    ],
+    "latencies": [
+      57.39113730400004,
+      55.03712829599999,
+      55.73492304399997,
+      56.44990002299983,
+      56.23673153599975
+    ],
+    "verdict": "PASS"
+  },
+  "mixed_profile": {
+    "sequence": [
+      "safe_512",
+      "high_768",
+      "safe_512"
+    ],
+    "latencies": [
+      59.13435082399974,
+      127.83654676000015,
+      56.35180962700042
+    ],
+    "sha256": [
+      "fe3c0799f832d10b507351380293959abb53d7153225fc798224e1e1d076037d",
+      "07307465165f58d6048753b3e51b437a0a4896ca32a42776785df5ee3e18ad89",
+      "b7847c5125f80eee07f1c12c372f71facf1181495170e1cd70ef880802497eac"
+    ],
+    "gpu0_peak_reserved_768": 15378415616,
+    "gpu1_peak_reserved_768": 14763950080,
+    "gpu0_final_allocated": 12374322688,
+    "gpu1_final_allocated": 8223223296,
+    "gpu0_final_reserved": 14512291840,
+    "gpu1_final_reserved": 14763950080,
+    "verdict": "PASS"
+  },
+  "error_boundary": {
+    "status_codes": {
+      "missing_auth": 401,
+      "invalid_auth": 403,
+      "blank_prompt": 422,
+      "unsupported_1024": 422
+    },
+    "ready_after": true,
+    "verdict": "PASS"
+  },
+  "public_tunnel": {
+    "public_url": "<ephemeral-quick-tunnel-url>",
+    "job_id": "img_da5a0c099bef45ea956e7f823c6b3274",
+    "inference_seconds": 57.5202375519998,
+    "sha256": "e08f68bd52768e77dbdcf64bcdcfa510401fda8692ed536f93f03bd7893932d3",
+    "png_bytes": 313820,
+    "verdict": "PASS"
+  },
+  "unsupported": [
+    "fp16",
+    "1024x1024",
+    "parallel_gpu_generation",
+    "pipeline_per_request"
+  ],
+  "final_verdict": "PASS"
+}
+FINAL_QUALIFICATION=PASS
