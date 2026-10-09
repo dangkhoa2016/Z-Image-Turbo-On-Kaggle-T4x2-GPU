@@ -37,6 +37,8 @@ Request 512 sau 768 vẫn hoàn tất bình thường. Allocated memory đạt p
 
 ## Error và security boundary
 
+Bài acceptance trên Kaggle runtime thật chỉ ghi các kiểm tra không phá vỡ phiên chạy khi GPU worker resident vẫn được giữ trong bộ nhớ:
+
 - thiếu auth → 401
 - auth không hợp lệ → 403
 - prompt rỗng → 422
@@ -44,6 +46,8 @@ Request 512 sau 768 vẫn hoàn tất bình thường. Allocated memory đạt p
 - worker vẫn ready sau đó
 
 Verdict: **PASS**.
+
+Toàn bộ HTTP status contract của coordinator được kiểm tra riêng trên CPU bằng FastAPI/TestClient, không gắn nhãn là GPU inference evidence. Evidence deterministic này bao phủ 401, 403, 404, 409, 422, 429 và 503, gồm unknown job, yêu cầu image trước khi hoàn tất, bounded queue đầy và worker unavailable. Xem [`evidence/api-contract-status-codes.json`](../evidence/api-contract-status-codes.json).
 
 ## Public REST path
 

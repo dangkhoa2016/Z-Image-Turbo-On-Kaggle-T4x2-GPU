@@ -108,3 +108,25 @@ def test_notebook_keeps_english_and_vietnamese_body_content_separate():
         expected = step.split("### Expected evidence / Kết quả cần thấy", 1)[1]
         assert "**English**" in expected
         assert "**Tiếng Việt**" in expected
+
+
+def test_embedded_payload_matches_repository_sources():
+    import ast
+    import base64
+    import io
+    import tarfile
+
+    nb = json.loads(NB.read_text(encoding="utf-8"))
+    text = _cells_text(nb)
+    match = re.search(r"PAYLOAD_B64 = ('(?:[^'\\]|\\.)*'|\"(?:[^\"\\]|\\.)*\")", text)
+    assert match, "embedded payload missing"
+    payload = base64.b64decode(ast.literal_eval(match.group(1)))
+    with tarfile.open(fileobj=io.BytesIO(payload), mode="r:gz") as archive:
+        members = {member.name: archive.extractfile(member).read() for member in archive.getmembers() if member.isfile()}
+
+    required = {"scripts/api_contract_acceptance.py", "scripts/verify_evidence.py"}
+    assert required <= members.keys()
+    for name, data in members.items():
+        source = ROOT / name
+        assert source.is_file(), f"payload member missing from repository: {name}"
+        assert data == source.read_bytes(), f"stale notebook payload member: {name}"

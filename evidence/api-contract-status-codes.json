@@ -1,0 +1,15 @@
+{
+  "source": "cpu_fastapi_contract_test",
+  "scope": "coordinator_http_contract_without_gpu_inference",
+  "status_codes": {
+    "missing_auth": 401,
+    "invalid_auth": 403,
+    "blank_prompt": 422,
+    "unsupported_1024": 422,
+    "unknown_job": 404,
+    "image_before_complete": 409,
+    "queue_full": 429,
+    "worker_unavailable": 503
+  },
+  "verdict": "PASS"
+}

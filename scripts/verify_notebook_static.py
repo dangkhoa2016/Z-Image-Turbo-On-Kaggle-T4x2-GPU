@@ -28,11 +28,17 @@ assert m, 'embedded payload not found'
 payload=base64.b64decode(ast.literal_eval(m.group(1)))
 assert hashlib.sha256(payload).hexdigest()==z['payload_sha256']
 with tarfile.open(fileobj=io.BytesIO(payload), mode='r:gz') as tf:
-    names=tf.getnames()
+    members={member.name: tf.extractfile(member).read() for member in tf.getmembers() if member.isfile()}
+names=list(members)
 assert names, 'empty payload'
-for name in names:
+required={'scripts/api_contract_acceptance.py','scripts/verify_evidence.py'}
+assert required <= members.keys(), f'missing required payload files: {sorted(required-members.keys())}'
+for name,data in members.items():
     assert not name.startswith(FORBIDDEN_PREFIXES), f'forbidden payload member: {name}'
     assert 'cloudflared' not in Path(name).name
+    source=ROOT/name
+    assert source.is_file(), f'payload member missing from repository: {name}'
+    assert source.read_bytes()==data, f'stale notebook payload member: {name}'
 assert z['payload_files']==len(names)
 print(json.dumps({'cells':len(nb['cells']),'payload_files':len(names),'payload_sha256':z['payload_sha256'],'verdict':'PASS'}, indent=2))
 print('NOTEBOOK_STATIC_VERIFY=PASS')

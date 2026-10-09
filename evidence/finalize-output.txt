@@ -81,6 +81,7 @@
     "verdict": "PASS"
   },
   "error_boundary": {
+    "scope": "live_kaggle_runtime_subset",
     "status_codes": {
       "missing_auth": 401,
       "invalid_auth": 403,
@@ -90,10 +91,25 @@
     "ready_after": true,
     "verdict": "PASS"
   },
+  "api_contract": {
+    "source": "cpu_fastapi_contract_test",
+    "scope": "coordinator_http_contract_without_gpu_inference",
+    "status_codes": {
+      "missing_auth": 401,
+      "invalid_auth": 403,
+      "blank_prompt": 422,
+      "unsupported_1024": 422,
+      "unknown_job": 404,
+      "image_before_complete": 409,
+      "queue_full": 429,
+      "worker_unavailable": 503
+    },
+    "verdict": "PASS"
+  },
   "public_tunnel": {
     "public_url": "<ephemeral-quick-tunnel-url>",
-    "job_id": "img_da5a0c099bef45ea956e7f823c6b3274",
-    "inference_seconds": 57.5202375519998,
+    "job_id": "img_98adb924082441c8a765fa86516aceb2",
+    "inference_seconds": 59.88366586000029,
     "sha256": "e08f68bd52768e77dbdcf64bcdcfa510401fda8692ed536f93f03bd7893932d3",
     "png_bytes": 313820,
     "verdict": "PASS"

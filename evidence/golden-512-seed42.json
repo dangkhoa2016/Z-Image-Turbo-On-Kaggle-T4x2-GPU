@@ -1,0 +1,21 @@
+{
+  "profile": "safe_512",
+  "seed": 42,
+  "width": 512,
+  "height": 512,
+  "steps": 9,
+  "guidance_scale": 0.0,
+  "dtype": "bfloat16",
+  "inference_seconds": 52.48268766800015,
+  "sha256": "56e0fca007d3da945de77788b5ab8a0a131b58730d93b624ca65e7c6ca6ea307",
+  "pixel_stats": {
+    "width": 512,
+    "height": 512,
+    "min": 0,
+    "max": 255,
+    "mean": 138.9663429260254,
+    "std": 67.73889570397705,
+    "unique_colors": 90846
+  },
+  "verdict": "PASS"
+}

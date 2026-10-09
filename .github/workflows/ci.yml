@@ -39,6 +39,14 @@ jobs:
           PYTHONPATH: src
         run: python -m pytest -q
 
+      - name: Verify curated evidence
+        env:
+          PYTHONPATH: src
+        run: |
+          python scripts/api_contract_acceptance.py
+          git diff --exit-code -- evidence/api-contract-status-codes.json
+          python scripts/verify_evidence.py
+
       - name: Compile Python sources
         run: python -m compileall -q src scripts tests
 
@@ -61,7 +69,7 @@ jobs:
             echo 'Forbidden runtime artifact is tracked.' >&2
             exit 1
           fi
-          if git grep -nE 'github_pat_[A-Za-z0-9_]+|ghp_[A-Za-z0-9]+|Authorization:[[:space:]]*Bearer[[:space:]]+[A-Za-z0-9._-]{20,}' -- . ':!evidence' ':!README.md' ':!README.vi.md'; then
+          if git grep -nE 'github_pat_[A-Za-z0-9_]+|ghp_[A-Za-z0-9]+|Authorization:[[:space:]]*Bearer[[:space:]]+[A-Za-z0-9._-]{20,}' -- . ':!README.md' ':!README.vi.md'; then
             echo 'Possible credential material found.' >&2
             exit 1
           fi

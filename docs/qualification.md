@@ -37,6 +37,8 @@ The post-768 512 request completed normally. Allocated memory plateaued; the lar
 
 ## Error and security boundary
 
+The live Kaggle runtime acceptance records the non-destructive checks that were exercised while the resident GPU worker remained loaded:
+
 - missing auth → 401
 - invalid auth → 403
 - blank prompt → 422
@@ -44,6 +46,8 @@ The post-768 512 request completed normally. Allocated memory plateaued; the lar
 - worker remained ready afterwards
 
 Verdict: **PASS**.
+
+The complete coordinator HTTP status contract is verified separately on CPU with FastAPI/TestClient, without claiming GPU inference. That deterministic contract evidence covers 401, 403, 404, 409, 422, 429, and 503, including unknown jobs, image-before-complete, bounded-queue overflow, and worker-unavailable behavior. See [`evidence/api-contract-status-codes.json`](../evidence/api-contract-status-codes.json).
 
 ## Public REST path
 
