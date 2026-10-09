@@ -16,19 +16,27 @@ Screenshot đẹp hoặc tunnel URL tạm thời không phải authority.
 
 ## Identity của production notebook
 
-Candidate hiện tại trong repository là `notebooks/kaggle-t4x2-rest-server-production.ipynb`. Presentation đã được chuẩn hóa theo workflow Step song ngữ thống nhất với các repository khác, trong khi toàn bộ executable code cell và embedded runtime payload identity được giữ nguyên.
+Candidate hiện tại trong repository là `notebooks/kaggle-t4x2-rest-server-production.ipynb`. Workflow Step song ngữ giữ nguyên embedded payload 30 file đã audit, đồng thời bật launch environment cho Hugging Face parallel loading đã qualification trước khi import Diffusers.
 
 Git blob của candidate hiện tại:
 
-`af738025e13a8eab631f3d797537530202dab143`
+`64f4b40b7dcb65b8f258505931d7ecf40c615402`
 
 SHA-256 của candidate hiện tại:
 
-`c2a68605cee4a841f840a9c7af2a62c5404411ffcbbae98cd164c79d7a93352f`
+`1aeaefb88b325ac068f996e7f1e6aaaf5f6e73e1fcf5b6de363d3426bd129d33`
 
-**Executed Kaggle qualification checkpoint gần nhất trước presentation-only revision này** dùng Git blob `dbd7ec6f7e2b20797cccdb178cb8d545e6aa8c1b` với SHA-256 `e93f5a1c48e386bf417ed7e4372cdde4dd806219218054a425f6a27b28d9964b`. Identity lịch sử này được giữ lại có chủ ý; không được đổi nhãn thành notebook mới một cách im lặng.
+Embedded payload SHA-256 vẫn là `3297e31dc53177e547d09b3d33febc2ebb46aba305398272dc9899d6528e3cfe`; manifest SHA-256 vẫn là `5fbc29b146223409db3f97dc6619a6e68df78a386a4cd3c5689406c4e44bcb66` với 30 file.
 
-Presentation revision không thay đổi executable code cell hay embedded payload authority, nhưng vẫn cần một fresh Kaggle Saved Version trước khi candidate hiện tại được nâng thành release acceptance notebook.
+Release acceptance run là một fresh Kaggle Saved Version chạy từ source candidate đã tối ưu hiện tại (SHA-256 `1aeaefb88b325ac068f996e7f1e6aaaf5f6e73e1fcf5b6de363d3426bd129d33`) trên tài khoản Kaggle chính thức của chủ dự án. Executed notebook artifact tải về có SHA-256 `488f881fbcd006e40de529d1e8c27a76f869a5370b0c97e4fcc3f3d041976599`: cả 11 code cell đều chạy, không có error output, có chín PNG được embed và run kết thúc với `FINAL_QUALIFICATION=PASS` cùng `EVIDENCE_VERIFY=PASS`.
+
+Cùng run này xác nhận `HF_ENABLE_PARALLEL_LOADING=YES` với bốn worker, thời gian load model `124.084353364` giây, BF16 device map đã qualification, golden SHA-256 chính xác `56e0fca007d3da945de77788b5ab8a0a131b58730d93b624ca65e7c6ca6ea307`, five-job queue endurance, live error boundaries và mixed qualification `512→768→512`. Optional public Quick Tunnel gate được chủ động bỏ qua và không phải release blocker. Record machine-readable đã curate nằm tại `evidence/official-kaggle-saved-version.json`.
+
+## Qualification parallel loading
+
+Ngày 2026-10-09, cùng tổ hợp model/runtime Kaggle T4×2 được benchmark với Hugging Face parallel loading trong khi vẫn giữ BF16 và device map đã qualification (`transformer→GPU0`, `text_encoder→GPU1`, `vae→GPU1`). Cold load của fresh acceptance trước đó là `736.009689181` giây. Cấu hình 2 worker load trong `190.432466950` giây; cấu hình 4 worker load trong `125.682013119` giây. Một golden validation độc lập với 4 worker load trong `127.763847371` giây, sinh seed 42 trong `52.131240722` giây và tái tạo chính xác canonical SHA-256 `56e0fca007d3da945de77788b5ab8a0a131b58730d93b624ca65e7c6ca6ea307`.
+
+Vì vậy notebook đã tối ưu đặt `HF_ENABLE_PARALLEL_LOADING=YES` và `HF_PARALLEL_LOADING_WORKERS=4` trước khi import Diffusers. Official Saved Version cuối cùng đã xác nhận độc lập cấu hình này trong full production workflow, vì vậy candidate parallel-loading hiện là release acceptance notebook.
 
 ## Golden output
 
@@ -37,6 +45,8 @@ PNG `safe_512`, seed 42 đã accepted có SHA-256:
 `56e0fca007d3da945de77788b5ab8a0a131b58730d93b624ca65e7c6ca6ea307`
 
 Nếu digest thay đổi sau khi đổi dependency hoặc model, cần điều tra; không nên âm thầm coi khác biệt là bình thường.
+
+Evidence bundle dùng cơ chế fail-closed: `scripts/verify_evidence.py` đối chiếu chéo các record đã curate với `qualification-summary.json` và `finalize-output.txt`, kiểm tra các trường SHA-256, bắt buộc dùng placeholder cho Quick Tunnel và từ chối tunnel hostname hoặc Bearer credential bị lộ. `scripts/api_contract_acceptance.py` tái tạo deterministic status-code contract của coordinator trên CPU; CI yêu cầu lần tái tạo này không tạo ra diff. Evidence từ Kaggle runtime thật và evidence contract trên CPU được giữ tách biệt rõ ràng.
 
 ## Evidence hygiene
 

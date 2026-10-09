@@ -19,6 +19,7 @@ def get(path, headers=None):
     except urllib.error.HTTPError as exc:
         return exc.code, exc.read(), exc.headers.get_content_type()
 
+
 status, body, content_type = get("/")
 root = json.loads(body)
 assert status == 200 and content_type == "application/json"
@@ -50,7 +51,14 @@ while True:
 assert job["status"] == "complete", job
 status, image, content_type = get("/v1/jobs/" + job_id + "/image", AUTH)
 assert status == 200 and content_type == "image/png" and image.startswith(b"\x89PNG\r\n\x1a\n")
-summary = {"public_url": BASE, "job_id": job_id, "inference_seconds": job["result"]["inference_seconds"], "sha256": job["result"]["sha256"], "png_bytes": len(image), "verdict": "PASS"}
-(ROOT / "evidence" / "public-tunnel-acceptance.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+summary = {
+    "public_url": "<ephemeral-quick-tunnel-url>",
+    "job_id": job_id,
+    "inference_seconds": job["result"]["inference_seconds"],
+    "sha256": job["result"]["sha256"],
+    "png_bytes": len(image),
+    "verdict": "PASS",
+}
+(ROOT / "evidence" / "public-tunnel-acceptance.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
 print(json.dumps(summary, indent=2))
 print("PUBLIC_TUNNEL_ACCEPTANCE=PASS")

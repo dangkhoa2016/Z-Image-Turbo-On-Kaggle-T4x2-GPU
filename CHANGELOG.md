@@ -4,7 +4,7 @@
 
 All notable repository changes are documented here. Published releases follow semantic versioning.
 
-## Unreleased
+## v1.0.0 — 2026-10-09
 
 ### Added
 

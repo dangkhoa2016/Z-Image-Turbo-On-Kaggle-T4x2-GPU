@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import threading
+import time
 import uuid
 from contextlib import asynccontextmanager
 
@@ -11,7 +12,7 @@ from pydantic import BaseModel
 from .runtime import ZImageRuntime
 
 _runtime = ZImageRuntime()
-_state = {"status": "starting", "error": None, "load": None}
+_state = {"status": "starting", "error": None, "load": None, "started_at": None, "finished_at": None}
 _lock = threading.Lock()
 
 
@@ -23,18 +24,26 @@ class WorkerRequest(BaseModel):
 
 
 def _load_runtime():
+    _state.update(status="loading_model", error=None, load=None, started_at=time.time(), finished_at=None)
     try:
-        _state["status"] = "loading_model"
         _state["load"] = _runtime.load()
         _state["status"] = "ready"
     except Exception as exc:
         _state["status"] = "error"
         _state["error"] = {"type": type(exc).__name__, "message": str(exc)}
+    finally:
+        _state["finished_at"] = time.time()
+
+
+def _start_runtime_load():
+    thread = threading.Thread(target=_load_runtime, name="zimage-model-loader", daemon=True)
+    thread.start()
+    return thread
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    _load_runtime()
+    _start_runtime_load()
     yield
 
 
@@ -43,7 +52,16 @@ app = FastAPI(title="Z-Image-Turbo Internal Worker", lifespan=lifespan)
 
 @app.get("/health")
 def health():
-    return {"status": _state["status"]}
+    started = _state.get("started_at")
+    finished = _state.get("finished_at")
+    elapsed = None
+    if started is not None:
+        elapsed = max(0.0, (finished or time.time()) - started)
+    return {
+        "status": _state["status"],
+        "elapsed_seconds": elapsed,
+        "error": _state.get("error"),
+    }
 
 
 @app.get("/ready")

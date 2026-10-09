@@ -4,7 +4,7 @@
 
 Các thay đổi đáng chú ý của repository được ghi lại tại đây. Các bản phát hành công khai tuân theo semantic versioning.
 
-## Chưa phát hành
+## v1.0.0 — 2026-10-09
 
 ### Đã bổ sung
 

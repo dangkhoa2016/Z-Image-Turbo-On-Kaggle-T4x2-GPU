@@ -1,13 +1,21 @@
 import json
+import os
 import time
 import urllib.request
 from pathlib import Path
 
 BASE = "http://127.0.0.1:8090"
-TOKEN = Path("/kaggle/working/Z-Image-Turbo-Kaggle-T4x2-REST-Server/.runtime/api_token").read_text().strip()
+ROOT = Path("/kaggle/working/Z-Image-Turbo-Kaggle-T4x2-REST-Server")
+TOKEN = (ROOT / ".runtime" / "api_token").read_text().strip()
 AUTH = {"Authorization": "Bearer " + TOKEN}
 JSON_HEADERS = {**AUTH, "Content-Type": "application/json"}
 PROMPT = "A cinematic futuristic library floating above a calm ocean at sunrise, warm volumetric light, intricate architecture, realistic reflections, highly detailed"
+LIVE_EVENTS = os.environ.get("ZIMAGE_NOTEBOOK_EVENTS") == "1"
+
+
+def emit_event(event, **payload):
+    if LIVE_EVENTS:
+        print("NOTEBOOK_EVENT\t" + json.dumps({"event": event, **payload}, separators=(",", ":")), flush=True)
 
 
 def submit(seed):
@@ -30,7 +38,7 @@ assert sum(j["status"] == "running" for j in initial) <= 1, initial
 assert all(j["status"] in {"queued", "running", "complete"} for j in initial)
 
 results = []
-for jid in ids:
+for index, jid in enumerate(ids, start=1):
     deadline = time.monotonic() + 420
     while True:
         job = get_job(jid)
@@ -41,6 +49,27 @@ for jid in ids:
         time.sleep(1)
     assert job["status"] == "complete", job
     results.append(job)
+    result = job["result"]
+    image_req = urllib.request.Request(BASE + "/v1/jobs/" + jid + "/image", headers=AUTH)
+    with urllib.request.urlopen(image_req, timeout=10) as response:
+        image_bytes = response.read()
+    assert image_bytes.startswith(b"\x89PNG\r\n\x1a\n")
+    (ROOT / "outputs").mkdir(parents=True, exist_ok=True)
+    image_rel = f"outputs/endurance-{index:02d}-seed-{result['seed']}.png"
+    (ROOT / image_rel).write_bytes(image_bytes)
+    emit_event(
+        "job_complete",
+        index=index,
+        total=len(ids),
+        job_id=jid,
+        profile=result["profile"],
+        seed=result["seed"],
+        inference_seconds=result["inference_seconds"],
+        sha256=result["sha256"],
+        width=result["width"],
+        height=result["height"],
+        image_path=image_rel,
+    )
 
 for previous, current in zip(results, results[1:]):
     assert current["started_at"] >= previous["finished_at"], (previous, current)
